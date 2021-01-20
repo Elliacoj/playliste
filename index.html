@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Playlist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div id="container">
+        <header>
+
+            <select name="type" id="type">
+                <option value="genre" selected>Genre</option>
+                <option value="all">Tous</option>
+                <option value="hiphop">Hip-Hop</option>
+                <option value="classic">Classique</option>
+                <option value="metal">Métal</option>
+                <option value="rock">Rock</option>
+                <option value="rap">Rap</option>
+            </select>
+
+            <select name="listPlaylist" id="listPlaylist">
+                <option value="listPlaylist" selected>Liste des playlist</option>
+            </select>
+
+            <div id="newPlaylist">Nouvelle playlist</div>
+            <div id="deletePlaylist">Supprimer une playlist</div>
+        </header>
+
+        <section>
+            <h2>Liste des musiques</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th id="title">Titre</th>
+                        <th id="artist">Artiste</th>
+                        <th id="during">Durée</th>
+                        <th id="youtube">YouTube</th>
+                    </tr>
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+        </section>
+        
+        <footer>
+            <div id="song">Musique en cours</div>
+            <div id="newSong">Nouvelle musique</div>
+            <div id="deleteSong">Supprimer une musique</div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

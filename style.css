@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 2rem;
+}
+
+#container, header, section, footer {
+    width: 100%;
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section {
+    background-color: #354b5a;
+    color: #f0f1ef;
+}
+
+header div, footer div {
+    width: 25%;
+    height: 50px;
+    text-align: center;
+    border: 1px solid black;
+    font-weight: bold;
+    padding: 1% 0 1% 0;
+}
+
+footer div:first-child {
+    width: 50%;
+}
+
+table {
+    width: 90%;
+    margin: 2% auto;
+}
+
+#title, #artist, #during {
+    border-right: 2px solid #ffffff;
+}
+
+#during, #youtube {
+    width: 15%
+}
+
+#title, #artist {
+    width: 35%;
+}
+
+select {
+    width: 25%;
+    height: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+h2 {
+    width: 100%;
+    text-align: center;
+    margin: 2% 0;
+}
+
+.window {
+    margin: 0 auto 2% auto;
+    background-color: darkgrey;
+    width: 50%;
+    border-radius: 15px;
+}
+
+label {
+    margin-left: 5%;
+}
+
+input, label {
+    margin-bottom: 2%;
+}
+
+button {
+    padding: 1%;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+#confirm {
+    margin-left: 40%;
+}
+
