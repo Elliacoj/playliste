@@ -27,8 +27,9 @@ function windowPlaylist() {
 
     $('#confirm').click(function () {
         let name = $('#newName').val();
+        let type = $('#newType').val();
         if(!playlistExists(name)) {
-            listPlaylist.append(createPlaylist(name));
+            listPlaylist.append(createPlaylist(name, type));
             $('#window').remove();
             table.css('display', 'table');
         }
@@ -50,11 +51,13 @@ deletePlaylist.click(function () {
 /**
  * Create a new playlist
  * @param name The playlist name.
+ * @param type The playlist type
  * @returns {HTMLOptionElement} The playlist HTMLOptionElement.
  */
-function createPlaylist(name) {
+function createPlaylist(name, type) {
     let playlist = {
         name: name,
+        type: type,
         songs: []
     }
 
@@ -63,7 +66,7 @@ function createPlaylist(name) {
 
     localStorage.setItem('playlists', JSON.stringify(playlists));
     let option = document.createElement('option');
-    option.innerHTML = name;
+    option.innerHTML = name + '<span class="typeList"> (' + type + ')</span>';
     option.id = name;
     return option;
 }
@@ -96,7 +99,7 @@ function getPlaylistsOptions() {
     for(let playlist of playlists) {
         let option = document.createElement('option');
         option.id = playlist.name;
-        option.innerHTML = playlist.name;
+        option.innerHTML = playlist.name + '<span class="typeList"> (' + playlist.type + ')</span>';
         listPlaylist.get(0).appendChild(option);
     }
 }
