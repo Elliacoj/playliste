@@ -26,6 +26,7 @@ function windowPlaylist() {
     $('#cancel').click(function () {
         $('#window').remove();
         table.css('display', 'table');
+        reactButton();
     });
 
     $('#confirm').click(function () {
@@ -35,6 +36,7 @@ function windowPlaylist() {
             listPlaylist.append(createPlaylist(name, type));
             $('#window').remove();
             table.css('display', 'table');
+            reactButton();
         }
         else {
             alert();
@@ -43,17 +45,7 @@ function windowPlaylist() {
 
 }
 
-newPlaylist.click(function () {
-    windowPlaylist();
-});
-
-deletePlaylist.click(function () {
-    supPlaylist();
-});
-
-deleteSong.click(function () {
-    supSong();
-})
+reactButton();
 
 /**
  * Create a new playlist
@@ -166,6 +158,7 @@ function supPlaylist() {
     $('#cancel').click(function () {
         $('#window').remove();
         table.css('display', 'table');
+        reactButton();
     });
 
     $('#confirm').click(function () {
@@ -186,6 +179,7 @@ function supPlaylist() {
             $('#' + name + '').remove();
             $('#window').remove();
             table.css('display', 'table');
+            reactButton();
         }
         else {
             alert();
@@ -207,6 +201,7 @@ function supSong() {
     $('#cancel').click(function () {
         $('#window').remove();
         table.css('display', 'table');
+        reactButton();
     });
 
     $('#confirm').click(function () {
@@ -228,6 +223,7 @@ function supSong() {
             $('#' + name + '').remove();
             $('#window').remove();
             table.css('display', 'table');
+            reactButton();
         }
         else {
             alert();
@@ -260,6 +256,7 @@ function newSongs() {
     $('#cancel').click(function () {
         $('#window').remove();
         table.css('display', 'table');
+        reactButton();
     });
 
     $('#confirm').click(function () {
@@ -277,6 +274,7 @@ function newSongs() {
                 $('#window').remove();
                 table.css('display', 'table');
                 creatTableLine(artiste,title,youtube);
+                reactButton();
             }
             else {
                 alert();
@@ -287,10 +285,6 @@ function newSongs() {
         }
     });
 }
-
-newSong.click(function () {
-    newSongs();
-})
 
 /**
  * Function for creat a new line for the new song in the visual playlist
@@ -320,3 +314,37 @@ function saveSong(playlistSave) {
     localStorage.setItem('playlists', JSON.stringify(playlists));
 }
 
+/**
+ * Function for enable buttons
+ */
+function blockButton() {
+    newSong.off("click");
+    deleteSong.off('click');
+    newPlaylist.off("click");
+    deletePlaylist.off('click');
+}
+
+/**
+ * Function for activate buttons
+ */
+function reactButton() {
+    newPlaylist.click(function () {
+        blockButton();
+        windowPlaylist();
+    });
+
+    deletePlaylist.click(function () {
+        blockButton();
+        supPlaylist();
+    });
+
+    deleteSong.click(function () {
+        blockButton();
+        supSong();
+    })
+
+    newSong.click(function () {
+        blockButton();
+        newSongs();
+    })
+}
