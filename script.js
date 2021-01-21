@@ -293,7 +293,16 @@ function newSongs() {
  * @param youtube
  */
 function creatTableLine(artiste, title, youtube) {
-    $('table tbody').append('<tr id="' + title + '"><td>' + title+ '</td><td>' + artiste + '</td><td></td><td>' + youtube + '</td></tr>');
+    $('table tbody').append(`
+        <tr style="display: none" id="${title}">
+            <td>${title}</td>
+            <td>${artiste}</td>
+            <td></td>
+            <td>${youtube}</td>
+        </tr>
+    `);
+
+    $(`#${title}`).show(1500, 'linear');
 }
 
 /**
@@ -348,3 +357,29 @@ function reactButton() {
         newSongs();
     })
 }
+
+listPlaylist.change(function () {
+    let check = $('#listPlaylist option:selected').attr('id');
+    let bodyTr = $('table tbody tr');
+
+    if(bodyTr.length > 0) {
+        $.each(bodyTr, function () {
+            $(this).remove();
+        });
+    }
+
+    if($('#listPlaylist #listOfPlaylist').attr('id') !== check) {
+        let playlist = loadPlaylist(check);
+        let songs = playlist.songs;
+        $.each(bodyTr, function () {
+            $(this).remove();
+        });
+
+        for(let song of songs) {
+            creatTableLine(song.artist, song.title, song.youtubeUrl)
+        }
+
+
+
+    }
+})

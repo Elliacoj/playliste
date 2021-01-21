@@ -95,4 +95,7 @@ button {
     margin-left: 40%;
 }
 
-
+td {
+    text-align: center;
+    padding: 1% 0;
+}
