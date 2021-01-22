@@ -372,6 +372,11 @@ function reactButton() {
 listPlaylist.change(function () {
     let check = $('#listPlaylist option:selected').attr('id');
     let bodyTr = $('table tbody tr');
+    let iframe = $('#iframe');
+
+    if(iframe.length === 1) {
+        iframe.remove();
+    }
 
     if(bodyTr.length > 0) {
         $.each(bodyTr, function () {
