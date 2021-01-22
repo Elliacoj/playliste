@@ -76,7 +76,7 @@ h2 {
 
 .window {
     margin: 0 auto 2% auto;
-    background-color: darkgrey;
+    background-color: #4c4646;
     width: 50%;
     border-radius: 15px;
 }
@@ -107,7 +107,6 @@ td {
 
 iframe {
     margin-top: 2%;
-    border: 2px solid black;
 }
 
 a {
@@ -120,6 +119,12 @@ footer div, header div {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+}
+
+#song {
+    font-style: italic;
+    color: #114fec;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 1000px){

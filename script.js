@@ -35,7 +35,7 @@ function windowPlaylist() {
             reactButton();
         }
         else {
-            alert();
+            alert("Nom de playlist déjà utilisé!");
         }
     });
 }
@@ -190,7 +190,7 @@ function supPlaylist() {
             reactButton();
         }
         else {
-            alert();
+            alert("Nom de playlist inexistante");
         }
 
     });
@@ -222,19 +222,19 @@ function supSong() {
             for(let song of songs) {
                 if(song.title === name) {
                     let index = songs.indexOf(song);
+                    console.log(index +1);
                     songs.splice(index, 1);
-
+                    $('tbody tr')[index].remove();
                     saveSong(playlist);
                 }
             }
 
-            $('#' + name + '').remove();
             $('#window').remove();
             table.css('display', 'table');
             reactButton();
         }
         else {
-            alert();
+            alert("Titre de musique inexistante");
         }
     });
 }
@@ -278,19 +278,22 @@ function newSongs() {
 
             if(!songExists(title, playlist)) {
                 createSong(playlist, artiste, title, link, youtube);
+                let index = playlist.songs.length;
                 $('#window').remove();
                 table.css('display', 'table');
-                creatTableLine(artiste,title,youtube);
+                creatTableLine(artiste,title,youtube, index);
                 reactButton();
+                play();
             }
             else {
-                alert();
+                alert("Cette musique n'existe pas!");
             }
         }
         else {
-            alert();
+            alert("Vous n'êtes pas dans une playlist!");
         }
     });
+
 }
 
 /**
@@ -298,8 +301,9 @@ function newSongs() {
  * @param artiste
  * @param title
  * @param youtube
+ * @param index
  */
-function creatTableLine(artiste, title, youtube) {
+function creatTableLine(artiste, title, youtube, index) {
     $('table tbody').append(`
         <tr id="${title}">
             <td>${title}</td>
@@ -389,6 +393,7 @@ listPlaylist.change(function () {
     play();
 });
 
+
 /**
  * Function for playing a song
  */
@@ -411,7 +416,7 @@ function play() {
                 allPlay();
                 $(this).children(child).remove();
                 $(this).append('<i class="far fa-pause-circle"></i>');
-                divSong.text(song.title);
+                divSong.text(song.title + ' - ' + song.artist);
             }
             else {
                 divSong.text("Lancer la lecteur d'une chanson");
