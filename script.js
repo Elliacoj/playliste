@@ -1,14 +1,10 @@
-let genre = $('#type');
 let listPlaylist = $('#listPlaylist');
 let newPlaylist = $('#newPlaylist');
 let deletePlaylist = $('#deletePlaylist');
 let newSong = $('#newSong');
 let deleteSong = $('#deleteSong');
 let table = $('table');
-
-//listPlaylist.text( listPlaylist.text() + storage.getItem('playList'));
-
-//console.log(storage.getItem('playList'));
+let divSong = $('#song');
 
 getPlaylistsOptions();
 
@@ -42,7 +38,6 @@ function windowPlaylist() {
             alert();
         }
     });
-
 }
 
 reactButton();
@@ -138,6 +133,19 @@ function loadPlaylist(name) {
 }
 
 /**
+ * Return the asked song.
+ * @param name
+ * @param title
+ * @returns {*}
+ */
+function loadSong(name, title) {
+    let playlist = loadPlaylist(name);
+    return playlist.songs.filter(item => {
+        return item.title === title;
+    })[0];
+}
+
+/**
  * Return all playlists
  * @returns {{}|*[]}
  */
@@ -228,7 +236,6 @@ function supSong() {
         else {
             alert();
         }
-
     });
 }
 
@@ -249,7 +256,7 @@ function newSongs() {
     $('#window').append('<h2>Nouvelle musique</h2>',
         '<label for="newArtiste">Artiste: </label>', '<input type="text" id="newArtiste"><br>',
         '<label for="newTitle">Titre: </label>', '<input type="text" id="newTitle"><br>',
-        '<label for="newLink">Lien de la musique: </label>', '<input type="text" id="newLink"><br>',
+        '<label for="newLink">Lien iframe de la musique: </label>', '<input type="text" id="newLink"><br>',
         '<label for="newYoutube">Lien Youtube: </label>', '<input type="text" id="newYoutube"><br>',
         '<button id="confirm">Confirmer</button>', '<button id="cancel">Annuler</button>');
 
@@ -294,15 +301,15 @@ function newSongs() {
  */
 function creatTableLine(artiste, title, youtube) {
     $('table tbody').append(`
-        <tr style="display: none" id="${title}">
+        <tr id="${title}">
             <td>${title}</td>
             <td>${artiste}</td>
-            <td></td>
-            <td>${youtube}</td>
+            <td class="play"><i class="far fa-play-circle"></i></td>
+            <td><a href="${youtube}" target="_blank">Lien</a></td>
         </tr>
     `);
 
-    $(`#${title}`).show(1500, 'linear');
+    //$(`#${title}`).show(1500, 'linear');
 }
 
 /**
@@ -378,8 +385,51 @@ listPlaylist.change(function () {
         for(let song of songs) {
             creatTableLine(song.artist, song.title, song.youtubeUrl)
         }
-
-
-
     }
-})
+    play();
+});
+
+/**
+ * Function for playing a song
+ */
+function play() {
+    let check = $('#listPlaylist option:selected').attr('id');
+    let play = $('.play');
+
+    $.each(play, function () {
+        $(this).click(function () {
+            let iframe = $('#iframe');
+            let child = $('i');
+            if($(this).children(child).attr('class') === 'far fa-play-circle') {
+                if(iframe.length === 1) {
+                    iframe.remove();
+                }
+
+                let title = $(this).parent().attr('id');
+                let song = loadSong(check, title);
+                $('#container').after('<div id="iframe">' + song.link + '</div>');
+                allPlay();
+                $(this).children(child).remove();
+                $(this).append('<i class="far fa-pause-circle"></i>');
+                divSong.text(song.title);
+            }
+            else {
+                divSong.text("Lancer la lecteur d'une chanson");
+                iframe.remove()
+                allPlay();
+            }
+        });
+    })
+}
+
+/**
+ * Function for change the text into "Play"
+ */
+function allPlay() {
+    let play = document.getElementsByClassName('play');
+    for(let x = 0; x < play.length; x++) {
+        if(play[x].lastElementChild.className !== "<i class=\"far fa-play-circle\"></i>") {
+            play[x].innerHTML = "<i class=\"far fa-play-circle\"></i>";
+        }
+    }
+}

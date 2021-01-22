@@ -12,6 +12,10 @@ body {
     width: 100%;
     font-family: Arial, sans-serif;
     font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #999999;
 }
 
 #container, header, section, footer {
@@ -19,6 +23,7 @@ body {
     border: 2px solid black;
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
 }
 
 section {
@@ -29,7 +34,6 @@ section {
 header div, footer div {
     width: 25%;
     height: 50px;
-    text-align: center;
     border: 1px solid black;
     font-weight: bold;
     padding: 1% 0 1% 0;
@@ -98,4 +102,46 @@ button {
 td {
     text-align: center;
     padding: 1% 0;
+    color: #e9e9ae;
+}
+
+iframe {
+    margin-top: 2%;
+    border: 2px solid black;
+}
+
+a {
+    text-decoration: none;
+    color: #ea0707;
+}
+
+footer div, header div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1000px){
+    html {
+        font-size: 50%;
+    }
+}
+
+@media screen and (max-width: 800px){
+    html {
+        font-size: 40%;
+    }
+}
+
+@media screen and (max-width: 650px){
+    html {
+        font-size: 30%;
+    }
+}
+
+@media screen and (max-width: 400px){
+    #cancel {
+        margin-left: 40%;
+    }
 }
