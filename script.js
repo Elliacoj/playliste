@@ -424,7 +424,7 @@ function play() {
                 divSong.text(song.title + ' - ' + song.artist);
             }
             else {
-                divSong.text("Lancer la lecteur d'une chanson");
+                divSong.text("Lancer la lecture d'une chanson");
                 iframe.remove()
                 allPlay();
             }
